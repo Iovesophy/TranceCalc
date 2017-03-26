@@ -1,0 +1,167 @@
+文法
+
+    0 $accept: program $end
+
+    1 program: statement
+    2        | program statement
+
+    3 statement: expression NL
+
+    4 expression: NUM
+    5           | expression ADD NUM
+    6           | expression SUB NUM
+    7           | expression MUL NUM
+    8           | expression DIV NUM
+
+
+出現位置の規則による終端
+
+$end (0) 0
+error (256)
+NUM (258) 4 5 6 7 8
+ADD (259) 5
+SUB (260) 6
+MUL (261) 7
+DIV (262) 8
+NL (263) 3
+
+
+出現位置の規則による非終端
+
+$accept (9)
+    左辺: 0
+program (10)
+    左辺: 1 2, 右辺: 0 2
+statement (11)
+    左辺: 3, 右辺: 1 2
+expression (12)
+    左辺: 4 5 6 7 8, 右辺: 3 5 6 7 8
+
+
+State 0
+
+    0 $accept: . program $end
+
+    NUM  shift, and go to state 1
+
+    program     go to state 2
+    statement   go to state 3
+    expression  go to state 4
+
+
+State 1
+
+    4 expression: NUM .
+
+    $default  reduce using rule 4 (expression)
+
+
+State 2
+
+    0 $accept: program . $end
+    2 program: program . statement
+
+    $end  shift, and go to state 5
+    NUM   shift, and go to state 1
+
+    statement   go to state 6
+    expression  go to state 4
+
+
+State 3
+
+    1 program: statement .
+
+    $default  reduce using rule 1 (program)
+
+
+State 4
+
+    3 statement: expression . NL
+    5 expression: expression . ADD NUM
+    6           | expression . SUB NUM
+    7           | expression . MUL NUM
+    8           | expression . DIV NUM
+
+    ADD  shift, and go to state 7
+    SUB  shift, and go to state 8
+    MUL  shift, and go to state 9
+    DIV  shift, and go to state 10
+    NL   shift, and go to state 11
+
+
+State 5
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+State 6
+
+    2 program: program statement .
+
+    $default  reduce using rule 2 (program)
+
+
+State 7
+
+    5 expression: expression ADD . NUM
+
+    NUM  shift, and go to state 12
+
+
+State 8
+
+    6 expression: expression SUB . NUM
+
+    NUM  shift, and go to state 13
+
+
+State 9
+
+    7 expression: expression MUL . NUM
+
+    NUM  shift, and go to state 14
+
+
+State 10
+
+    8 expression: expression DIV . NUM
+
+    NUM  shift, and go to state 15
+
+
+State 11
+
+    3 statement: expression NL .
+
+    $default  reduce using rule 3 (statement)
+
+
+State 12
+
+    5 expression: expression ADD NUM .
+
+    $default  reduce using rule 5 (expression)
+
+
+State 13
+
+    6 expression: expression SUB NUM .
+
+    $default  reduce using rule 6 (expression)
+
+
+State 14
+
+    7 expression: expression MUL NUM .
+
+    $default  reduce using rule 7 (expression)
+
+
+State 15
+
+    8 expression: expression DIV NUM .
+
+    $default  reduce using rule 8 (expression)
