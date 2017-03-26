@@ -7,22 +7,26 @@
 
     3 statement: expression NL
 
-    4 expression: NUM
-    5           | expression ADD NUM
-    6           | expression SUB NUM
-    7           | expression MUL NUM
-    8           | expression DIV NUM
+    4 expression: term
+    5           | expression ADD term
+    6           | expression SUB term
+
+    7 term: primary_expression
+    8     | term MUL primary_expression
+    9     | term DIV primary_expression
+
+   10 primary_expression: NUM
 
 
 出現位置の規則による終端
 
 $end (0) 0
 error (256)
-NUM (258) 4 5 6 7 8
+NUM (258) 10
 ADD (259) 5
 SUB (260) 6
-MUL (261) 7
-DIV (262) 8
+MUL (261) 8
+DIV (262) 9
 NL (263) 3
 
 
@@ -35,7 +39,11 @@ program (10)
 statement (11)
     左辺: 3, 右辺: 1 2
 expression (12)
-    左辺: 4 5 6 7 8, 右辺: 3 5 6 7 8
+    左辺: 4 5 6, 右辺: 3 5 6
+term (13)
+    左辺: 7 8 9, 右辺: 4 5 6 8 9
+primary_expression (14)
+    左辺: 10, 右辺: 7 8 9
 
 
 State 0
@@ -44,16 +52,18 @@ State 0
 
     NUM  shift, and go to state 1
 
-    program     go to state 2
-    statement   go to state 3
-    expression  go to state 4
+    program             go to state 2
+    statement           go to state 3
+    expression          go to state 4
+    term                go to state 5
+    primary_expression  go to state 6
 
 
 State 1
 
-    4 expression: NUM .
+   10 primary_expression: NUM .
 
-    $default  reduce using rule 4 (expression)
+    $default  reduce using rule 10 (primary_expression)
 
 
 State 2
@@ -61,11 +71,13 @@ State 2
     0 $accept: program . $end
     2 program: program . statement
 
-    $end  shift, and go to state 5
+    $end  shift, and go to state 7
     NUM   shift, and go to state 1
 
-    statement   go to state 6
-    expression  go to state 4
+    statement           go to state 8
+    expression          go to state 4
+    term                go to state 5
+    primary_expression  go to state 6
 
 
 State 3
@@ -78,58 +90,65 @@ State 3
 State 4
 
     3 statement: expression . NL
-    5 expression: expression . ADD NUM
-    6           | expression . SUB NUM
-    7           | expression . MUL NUM
-    8           | expression . DIV NUM
+    5 expression: expression . ADD term
+    6           | expression . SUB term
 
-    ADD  shift, and go to state 7
-    SUB  shift, and go to state 8
-    MUL  shift, and go to state 9
-    DIV  shift, and go to state 10
+    ADD  shift, and go to state 9
+    SUB  shift, and go to state 10
     NL   shift, and go to state 11
 
 
 State 5
+
+    4 expression: term .
+    8 term: term . MUL primary_expression
+    9     | term . DIV primary_expression
+
+    MUL  shift, and go to state 12
+    DIV  shift, and go to state 13
+
+    $default  reduce using rule 4 (expression)
+
+
+State 6
+
+    7 term: primary_expression .
+
+    $default  reduce using rule 7 (term)
+
+
+State 7
 
     0 $accept: program $end .
 
     $default  accept
 
 
-State 6
+State 8
 
     2 program: program statement .
 
     $default  reduce using rule 2 (program)
 
 
-State 7
-
-    5 expression: expression ADD . NUM
-
-    NUM  shift, and go to state 12
-
-
-State 8
-
-    6 expression: expression SUB . NUM
-
-    NUM  shift, and go to state 13
-
-
 State 9
 
-    7 expression: expression MUL . NUM
+    5 expression: expression ADD . term
 
-    NUM  shift, and go to state 14
+    NUM  shift, and go to state 1
+
+    term                go to state 14
+    primary_expression  go to state 6
 
 
 State 10
 
-    8 expression: expression DIV . NUM
+    6 expression: expression SUB . term
 
-    NUM  shift, and go to state 15
+    NUM  shift, and go to state 1
+
+    term                go to state 15
+    primary_expression  go to state 6
 
 
 State 11
@@ -141,27 +160,55 @@ State 11
 
 State 12
 
-    5 expression: expression ADD NUM .
+    8 term: term MUL . primary_expression
 
-    $default  reduce using rule 5 (expression)
+    NUM  shift, and go to state 1
+
+    primary_expression  go to state 16
 
 
 State 13
 
-    6 expression: expression SUB NUM .
+    9 term: term DIV . primary_expression
 
-    $default  reduce using rule 6 (expression)
+    NUM  shift, and go to state 1
+
+    primary_expression  go to state 17
 
 
 State 14
 
-    7 expression: expression MUL NUM .
+    5 expression: expression ADD term .
+    8 term: term . MUL primary_expression
+    9     | term . DIV primary_expression
 
-    $default  reduce using rule 7 (expression)
+    MUL  shift, and go to state 12
+    DIV  shift, and go to state 13
+
+    $default  reduce using rule 5 (expression)
 
 
 State 15
 
-    8 expression: expression DIV NUM .
+    6 expression: expression SUB term .
+    8 term: term . MUL primary_expression
+    9     | term . DIV primary_expression
 
-    $default  reduce using rule 8 (expression)
+    MUL  shift, and go to state 12
+    DIV  shift, and go to state 13
+
+    $default  reduce using rule 6 (expression)
+
+
+State 16
+
+    8 term: term MUL primary_expression .
+
+    $default  reduce using rule 8 (term)
+
+
+State 17
+
+    9 term: term DIV primary_expression .
+
+    $default  reduce using rule 9 (term)

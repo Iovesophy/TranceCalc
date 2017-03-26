@@ -22,7 +22,7 @@ yywrap(void)
 
 %token <double_value> NUM
 %token ADD SUB MUL DIV NL
-%type <double_value> expression
+%type <double_value> expression term primary_expression
 
 %%
 
@@ -36,23 +36,27 @@ statement	: expression NL
 			}
 		;
 
-expression	: NUM
-		| expression ADD NUM
+expression	: term
+		| expression ADD term
 			{
 			 $$ = $1 + $3;
 			}
-		| expression SUB NUM
+		| expression SUB term
 			{
 			 $$ = $1 - $3;
 			}
-		| expression MUL NUM
+		;
+term		: primary_expression
+		| term MUL primary_expression
 			{
 			 $$ = $1 * $3;
 			}
-		| expression DIV NUM
+		| term DIV primary_expression
 			{
 			 $$ = $1 / $3;
 			}
+		;
+primary_expression : NUM
 		;
 
 %%
