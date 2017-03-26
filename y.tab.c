@@ -1226,7 +1226,7 @@ yyreduce:
         case 4:
 #line 34 "calc.y" /* yacc.c:1646  */
     {
-			 fprintf(stdout, "%g\n", (yyvsp[-1].double_value));
+			 fprintf(stdout, ">>%g\n", (yyvsp[-1].double_value));
 			}
 #line 1232 "y.tab.c" /* yacc.c:1646  */
     break;

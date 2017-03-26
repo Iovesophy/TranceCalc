@@ -1,8 +1,8 @@
 %%
-"tasu"             return ADD;
-"hiku"             return SUB;
-"kakeru"             return MUL;
-"waru"             return DIV;
+"+"             return ADD;
+"-"             return SUB;
+"*"             return MUL;
+"/"             return DIV;
 "\n"                return NL;
 
 ([1-9][0-9]*)|0|([0-9]+\.[0-9]*) {

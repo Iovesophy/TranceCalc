@@ -32,7 +32,7 @@ program		: statement
 
 statement	: expression NL
 			{
-			 fprintf(stdout, "%g\n", $1);
+			 fprintf(stdout, ">>%g\n", $1);
 			}
 		;
 
