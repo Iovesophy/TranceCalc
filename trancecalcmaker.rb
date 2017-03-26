@@ -1,17 +1,17 @@
 # coding: utf-8
 puts "*-------------------------\\"
-puts "|  Trance Calc [ver-0.1]  |"
+puts "|  Trance Calc [ver-0.2]  |"
 puts "\\-------------------------*"
 puts ""
 puts "----> makeing start <----"
 puts ""
-puts "足し算のオペレーターを決めて入力してください:"
+puts "足し算の算術演算子を決めて入力してください:"
 add = gets.chomp.to_s
-puts "引き算のオペレーターを決めて入力してください:"
+puts "引き算の算術演算子を決めて入力してください:"
 sub = gets.chomp.to_s
-puts "掛け算のオペレーターを決めて入力してください:"
+puts "掛け算の算術演算子を決めて入力してください:"
 mul = gets.chomp.to_s
-puts "割り算のオペレーターを決めて入力してください:"
+puts "割り算の算術演算子を決めて入力してください:"
 div = gets.chomp.to_s
 
 File.open("calc.l","w") do |code|
@@ -44,5 +44,7 @@ system('yacc -dv calc.y')
 system('cc -o trancecalc y.tab.c')
 
 puts ""
-puts "----> complete!!1! <----"
-
+puts "----> complete!!!!! <----"
+puts ""
+puts "---->  電卓起動!!!  <----"
+system('./trancecalc')

@@ -453,8 +453,8 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    29,    29,    30,    33,    39,    40,    44,    49,    50,
-      54,    59
+       0,    29,    29,    30,    33,    40,    41,    45,    50,    51,
+      55,    60
 };
 #endif
 
@@ -1230,45 +1230,46 @@ yyreduce:
         case 4:
 #line 34 "calc.y" /* yacc.c:1646  */
     {
-			 fprintf(stdout, ">>%g\n", (yyvsp[-1].double_value));
+			 fprintf(stdout, "---->   計算結果    <----\n%g\n", (yyvsp[-1].double_value));
+			 fprintf(stdout, "---->  電卓継続!!!  <----\n");
 			}
-#line 1236 "y.tab.c" /* yacc.c:1646  */
+#line 1237 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 41 "calc.y" /* yacc.c:1646  */
+#line 42 "calc.y" /* yacc.c:1646  */
     {
 			 (yyval.double_value) = (yyvsp[-2].double_value) + (yyvsp[0].double_value);
 			}
-#line 1244 "y.tab.c" /* yacc.c:1646  */
+#line 1245 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 45 "calc.y" /* yacc.c:1646  */
+#line 46 "calc.y" /* yacc.c:1646  */
     {
 			 (yyval.double_value) = (yyvsp[-2].double_value) - (yyvsp[0].double_value);
 			}
-#line 1252 "y.tab.c" /* yacc.c:1646  */
+#line 1253 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 51 "calc.y" /* yacc.c:1646  */
+#line 52 "calc.y" /* yacc.c:1646  */
     {
 			 (yyval.double_value) = (yyvsp[-2].double_value) * (yyvsp[0].double_value);
 			}
-#line 1260 "y.tab.c" /* yacc.c:1646  */
+#line 1261 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 55 "calc.y" /* yacc.c:1646  */
+#line 56 "calc.y" /* yacc.c:1646  */
     {
 			 (yyval.double_value) = (yyvsp[-2].double_value) / (yyvsp[0].double_value);
 			}
-#line 1268 "y.tab.c" /* yacc.c:1646  */
+#line 1269 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1272 "y.tab.c" /* yacc.c:1646  */
+#line 1273 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1496,7 +1497,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 62 "calc.y" /* yacc.c:1906  */
+#line 63 "calc.y" /* yacc.c:1906  */
 
 
 #include "lex.yy.c"

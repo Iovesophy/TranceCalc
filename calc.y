@@ -32,7 +32,8 @@ program		: statement
 
 statement	: expression NL
 			{
-			 fprintf(stdout, ">>%g\n", $1);
+			 fprintf(stdout, "---->   計算結果    <----\n%g\n", $1);
+			 fprintf(stdout, "---->  電卓継続!!!  <----\n");
 			}
 		;
 
