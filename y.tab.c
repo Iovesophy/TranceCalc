@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.0.2.  */
+/* A Bison parser, made by GNU Bison 3.0.4.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2013 Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@
 #define YYBISON 1
 
 /* Bison version.  */
-#define YYBISON_VERSION "3.0.2"
+#define YYBISON_VERSION "3.0.4"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -133,7 +133,7 @@ extern int yydebug;
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE YYSTYPE;
+
 union YYSTYPE
 {
 #line 19 "calc.y" /* yacc.c:355  */
@@ -142,6 +142,8 @@ union YYSTYPE
 
 #line 144 "y.tab.c" /* yacc.c:355  */
 };
+
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
@@ -155,7 +157,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 159 "y.tab.c" /* yacc.c:358  */
+#line 161 "y.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -1233,7 +1235,7 @@ yyreduce:
 			 fprintf(stdout, "---->   計算結果    <----\n%g\n", (yyvsp[-1].double_value));
 			 fprintf(stdout, "---->  電卓継続!!!  <----\n");
 			}
-#line 1237 "y.tab.c" /* yacc.c:1646  */
+#line 1239 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
@@ -1241,7 +1243,7 @@ yyreduce:
     {
 			 (yyval.double_value) = (yyvsp[-2].double_value) + (yyvsp[0].double_value);
 			}
-#line 1245 "y.tab.c" /* yacc.c:1646  */
+#line 1247 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
@@ -1249,7 +1251,7 @@ yyreduce:
     {
 			 (yyval.double_value) = (yyvsp[-2].double_value) - (yyvsp[0].double_value);
 			}
-#line 1253 "y.tab.c" /* yacc.c:1646  */
+#line 1255 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
@@ -1257,7 +1259,7 @@ yyreduce:
     {
 			 (yyval.double_value) = (yyvsp[-2].double_value) * (yyvsp[0].double_value);
 			}
-#line 1261 "y.tab.c" /* yacc.c:1646  */
+#line 1263 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
@@ -1265,11 +1267,11 @@ yyreduce:
     {
 			 (yyval.double_value) = (yyvsp[-2].double_value) / (yyvsp[0].double_value);
 			}
-#line 1269 "y.tab.c" /* yacc.c:1646  */
+#line 1271 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1273 "y.tab.c" /* yacc.c:1646  */
+#line 1275 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires

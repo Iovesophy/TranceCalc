@@ -41,10 +41,8 @@ end
 
 system('lex calc.l')
 system('yacc -dv calc.y')
-system('cc -o trancecalc y.tab.c')
+# system('cc -o trancecalc y.tab.c')
 
 puts ""
 puts "----> complete!!!!! <----"
 puts ""
-puts "---->  電卓起動!!!  <----"
-system('./trancecalc')
